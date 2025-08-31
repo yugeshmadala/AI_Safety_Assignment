@@ -1,6 +1,6 @@
 import os
 
-folders = ["data", "models", "src", "scripts", "notebooks"]
+folders = ["models", "src"]
 
 files = [
     "requirements.txt",
