@@ -6,7 +6,6 @@ files = [
     "requirements.txt",
     "README.md",
     "src/train.py",
-    "src/evaluate.py",
     "src/inference.py",
     "src/escalation.py",
     "src/crisis_detector.py",
