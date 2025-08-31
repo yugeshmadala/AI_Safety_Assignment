@@ -8,7 +8,7 @@ from sklearn.metrics import classification_report
 import joblib
 import os
 
-def train_abuse_model():
+def train_abuse_model(return_model=False):
     print("Loading dataset...")
     dataset = load_dataset("hate_speech_offensive")
     print("Dataset loaded")
@@ -34,6 +34,9 @@ def train_abuse_model():
 
     os.makedirs("models", exist_ok=True)
     joblib.dump(clf, "models/abuse_detector.pkl")
+
+    if return_model:
+        return clf
 
 if __name__ == "__main__":
     train_abuse_model() 

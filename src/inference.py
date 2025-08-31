@@ -1,26 +1,27 @@
 import joblib
+import os 
 
-def load_model(model_path="models/abuse_detector.pkl"):
-    model = joblib.load(model_path)
-    print("Model Loaded")
-    return model
+Model_path = os.path.join(os.path.dirname(__file__), "..", "models", "abuse_detector.pkl")
+Model_path = os.path.abspath(Model_path)
 
-def predict_text(model, text):
-    pred = model.predict([text])[0]
-    probability = model.predict_proba([text])[0]
-    return pred, probability 
+Label_Mapping = {
+    0: "Hate Speech",
+    1: "Offensive",
+    2: "Neither"
+}
 
-if __name__ == "__main__":
-    model = load_model()
-    print("Abuse Detection Demo")
-    print("Type 'exit' to quit\n")
+def abuse_inference_cli(load_model=False):
+    if load_model:
+        model = joblib.load(Model_path)
+        return AbuseModelWrapper(model), model
+    
+class AbuseModelWrapper:
+    def __init__(self, model):
+        self.model = model
 
-    while True:
-        text = input("Enter text: ")
-        if text.lower() == "exit":
-            break 
-        label, probability = predict_text(model, text)
-        print(f"Predicted label: {label}")
-        print(f"Class probabilities: {probability}\n")
-
-        
+    def predict(self, text):
+        pred = self.model.predict([text])[0]
+        probability = self.model.predict_proba([text])[0]
+        label_text = Label_Mapping.get(pred, f"Unknown ({pred})")
+        return label_text, probability
+    
