@@ -34,7 +34,7 @@ Features
 
 HOW TO RUN:
 
-1.Clone the repository :https://github.com/yugeshmadala/AI_Safety_Assignment.git
+1.Clone the repository :https://github.com/yugeshmadala/AI_Safety_Assignment.git.
 2.Set up a virtual environment.
 3.Install dependencies using the requirements.txt 
 4.Run the app using streamlit: streamlit run src/app.py 
